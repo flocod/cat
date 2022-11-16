@@ -1,9 +1,9 @@
 // color
-$theme:#194056;
+$theme: #194056;
 //polices
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
 /**
 Thin 100
 Extra-light 200
@@ -53,38 +53,32 @@ Black 900
   background-color: rgba(0, 0, 0, 0);
 }
 
-
 //link init
 a {
+  display: inline-block;
+  text-decoration: none;
+  color: inherit;
+
+  :hover {
     display: inline-block;
     text-decoration: none;
     color: inherit;
-  
-    :hover {
-      display: inline-block;
-      text-decoration: none;
-      color: inherit;
-    }
   }
-
-
-
-  .main{
-    display: flex;
-    justify-content: space-between;
-    height: 100%;
-    width: 100%;
 }
 
-
-
+.main {
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+}
 
 .lottie_cat {
   display: block;
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translateX(-100%) translateY(-50%);
+  transform: translateX(-100%) translateY(-50%) scaleX(1) rotate(0deg);
   width: 20%;
 
   @media all and (max-width: 775px) {
@@ -99,6 +93,5 @@ a {
 }
 
 .cat_back {
-
-  transform: translateX(-100%) translateY(-50%) scaleX(-1);
+  transform: translateX(-100%) translateY(-50%) scaleX(-1) rotate(0deg);
 }

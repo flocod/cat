@@ -1,12 +1,3 @@
-$(document).ready(function () {
-    
-
-
-});
-
-
-
-
 
 let last_left_position;
 
@@ -23,11 +14,10 @@ function makeNewPosition() {
 
 function animateDiv(myclass) {
   let newq = makeNewPosition();
-  //   $(myclass).animate({ top: newq[0], left: newq[1] }, 1000, function () {
-  //     //   animateDiv(myclass);
-  //     console.log("zsfvgsvf");
-  //   });
+
   console.log("zsfvgsvf");
+
+ 
 
   TweenLite.to(myclass, 1, {
     css: {
@@ -45,38 +35,60 @@ function animateDiv(myclass) {
   last_left_position = newq[1];
 }
 
-
-
-  
-  let timeout;
-  let MoveInterval;
-  $(window).on("mousemove", function moveContain_cursor(e) {
-    clearTimeout(timeout);
-    clearInterval(MoveInterval);
-    timeout = setTimeout(function () {
-      console.log("mouse not move");
-      MoveInterval = setInterval(function () {
-        animateDiv("#lottie_cat");
-      }, 5000);
+let timeout;
+let MoveInterval;
+$(window).on("mousemove", function moveContain_cursor(e) {
+  clearTimeout(timeout);
+  clearInterval(MoveInterval);
+  timeout = setTimeout(function () {
+    console.log("mouse not move");
+    MoveInterval = setInterval(function () {
+      animateDiv("#lottie_cat");
     }, 5000);
-  
-    if (last_left_position > e.clientX && Math.abs(last_left_position) >= $("#lottie_cat").width()) {
-      $("#lottie_cat").addClass("cat_back");
-    } else {
-      $("#lottie_cat").removeClass("cat_back");
-    }
-  
-  
-  
-  
-    TweenLite.to("#lottie_cat", 1, {
-      css: {
-        left: e.clientX,
-        top: e.clientY,
+  }, 5000);
 
-      },
-    });
-  
-    last_left_position = e.clientX;
+  if (
+    last_left_position > e.clientX &&
+    Math.abs(last_left_position) >= $("#lottie_cat").width()
+  ) {
+    $("#lottie_cat").addClass("cat_back");
+  } else {
+    $("#lottie_cat").removeClass("cat_back");
+  }
+
+
+  const mouse ={
+    x: e.clientX,
+    y:e.clientY
+  }
+
+  const cat= document.querySelector("#lottie_cat");
+  const catRect = cat.getBoundingClientRect();
+  const angle =  Math.atan((catRect.y + catRect.height/2 - mouse.y) / (catRect.x + catRect.width/2 - mouse.x) );
+console.log("--------------------Angle de mouvement------------------");
+console.log("angle:",angle);
+
+
+  TweenLite.to("#lottie_cat", 1, {
+    css: {
+      left: mouse.x,
+      top: mouse.y,
+    },
+    onComplete: () => {
+      TweenLite.to("#lottie_cat", 0.3, {
+        css: {
+          opacity: 0,
+        },
+      });
+    },
+    onStart: () => {
+      TweenLite.to("#lottie_cat", 0.3, {
+        css: {
+          opacity: 1,
+        },
+      });
+    },
   });
-  
+
+  last_left_position = e.clientX;
+});
